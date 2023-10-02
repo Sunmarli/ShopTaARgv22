@@ -1,4 +1,9 @@
-﻿namespace Shop.Models.RealEstate
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+
+namespace Shop.Models.RealEstate
+
 {
     public class RealEstateIndexViewModel
     {
@@ -10,6 +15,7 @@
         public string BuildingType { get; set; }
 
         //database
+        
         public DateTime BuiltInYear { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

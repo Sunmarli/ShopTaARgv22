@@ -23,7 +23,8 @@
                 <th scope="col">RoomCount</th>
                 <th scope="col">Floor</th>
                 <th scope="col">BuildingType</th>
-                <th scope="col">BuiltInYear</th>
+                
+
                 <th></th>
             </tr>
         </thead>
@@ -37,7 +38,7 @@
                     <td>@realestate.RoomCount</td>
                     <td>@realestate.Floor</td>
                     <td>@realestate.BuildingType</td>
-                    <td>@realestate.BuiltInYear</td>
+                   
                     <td>
                         <a asp-action="details" asp-controller="realestate" asp-route-id="@realestate.Id" class="btn btn-info">Details</a>
                         <a asp-action="update" asp-controller="realestate" asp-route-id="@realestate.Id" class="btn btn-outline-primary">Update</a>
