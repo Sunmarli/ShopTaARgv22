@@ -174,7 +174,7 @@ namespace Shop.Controllers
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
                 Files= vm.Files,
-                FileToApiDtos=vm.FileToApiViewModels
+                Image=vm.FileToApiViewModels
                     .Select(x=> new FileToApiDto
                     {
                         Id=x.ImageId,
