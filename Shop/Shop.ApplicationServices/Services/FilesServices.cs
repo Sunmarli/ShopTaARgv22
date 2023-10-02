@@ -60,7 +60,7 @@ namespace Shop.ApplicationServices.Services
             }
         }
 
-        public async Task<List<FileToApi>> RemoveImageFromApi(FileToApiDto[] dtos
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos
             )
         {
             foreach (var dto in dtos)
@@ -74,6 +74,11 @@ namespace Shop.ApplicationServices.Services
                 {
                     File.Delete(filePath);
                 }
+
+                _context.FileToApis.Remove(imageId);
+                await _context.SaveChangesAsync();  
+
+
             }
            
             return null;
