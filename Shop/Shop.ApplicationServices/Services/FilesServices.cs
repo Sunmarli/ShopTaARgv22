@@ -110,11 +110,13 @@ namespace Shop.ApplicationServices.Services
             if (dto.Files != null && dto.Files.Count>0)
               {
                 foreach (var file in dto.Files)
-
+                {
                     using (var target = new MemoryStream())
                     {
 
                     }
+                }
+                 
                }
                 
         }
