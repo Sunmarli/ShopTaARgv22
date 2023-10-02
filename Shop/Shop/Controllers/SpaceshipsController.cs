@@ -7,6 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
+using Shop.ApplicationServices.Services;
 
 namespace Shop.Controllers
 {
@@ -26,7 +27,7 @@ namespace Shop.Controllers
         {
             _context = context;
             _spaceshipServices = spaceshipServices;
-            fileServices = _fileServices;
+            _fileServices = fileServices;
         }
 
         
@@ -70,7 +71,7 @@ namespace Shop.Controllers
                 Image = vm.FileToApiViewModels
                     .Select(x => new FileToApiDto
                     {
-                        Id = x.Id,
+                        Id = x.ImageId,
                         ExistingFilePath = x.FilePath,
                         SpaceshipId = x.SpaceshipId,
                     }).ToArray()
@@ -101,7 +102,7 @@ namespace Shop.Controllers
                 .Select(y => new FileToApiViewModel
                 {
                     FilePath = y.ExistingFilePath,
-                    Id = y.Id
+                    ImageId = y.Id
                 }).ToArrayAsync();
             
             
@@ -136,7 +137,7 @@ namespace Shop.Controllers
                 .Select(y => new FileToApiViewModel
                 {
                     FilePath = y.ExistingFilePath,
-                    Id = y.Id
+                    ImageId = y.Id
                 }).ToArrayAsync();
 
             var vm = new SpaceshipsCreateUpdateViewModel();
@@ -172,6 +173,14 @@ namespace Shop.Controllers
                 CargoWeight = vm.CargoWeight,
                 CreatedAt = vm.CreatedAt,
                 ModifiedAt = vm.ModifiedAt,
+                Files= vm.Files,
+                FileToApiDtos=vm.FileToApiViewModels
+                    .Select(x=> new FileToApiDto
+                    {
+                        Id=x.ImageId,
+                        ExistingFilePath=x.FilePath,
+                        SpaceshipId=x.SpaceshipId
+                    }).ToArray()
             };
 
             var result = await _spaceshipServices.Update(dto);
@@ -198,7 +207,7 @@ namespace Shop.Controllers
                 .Select(y => new FileToApiViewModel
                 {
                     FilePath = y.ExistingFilePath,
-                    Id = y.Id
+                    ImageId = y.Id
                 }).ToArrayAsync();
 
 
@@ -232,17 +241,24 @@ namespace Shop.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-    }
 
         [HttpPost]
-        public async Task<IActionResult> RemoveImage (FileToApiViewModel vm)
-            {
+        public async Task<IActionResult> RemoveImage(FileToApiViewModel vm)
+        {
             var dto = new FileToApiDto()
-                {
-                    Id = vm.Id,
-                };
+            {
+                Id = vm.ImageId,
+            };
 
-            var image= await _
+            var image = await _fileServices.RemoveImageFromApi(dto);
 
+            if (image == null)
+            {
+                return RedirectToAction(nameof(Index));
             }
+
+            return RedirectToAction(nameof(Index));
+
         }
+    }
+}
