@@ -60,8 +60,7 @@ namespace Shop.ApplicationServices.Services
             }
         }
 
-        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos
-            )
+        public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
         {
             foreach (var dto in dtos)
             {

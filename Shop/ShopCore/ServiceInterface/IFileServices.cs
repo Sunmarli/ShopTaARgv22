@@ -13,7 +13,8 @@ namespace ShopCore.ServiceInterface
     {
         void FilesToApi(SpaceshipDto dto, Spaceship spaceship);
 
-        
+         Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos);
+
 
     }
 }
