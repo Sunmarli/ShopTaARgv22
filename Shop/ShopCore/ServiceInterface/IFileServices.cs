@@ -1,11 +1,6 @@
 ﻿using ShopCore.Domain;
 using ShopCore.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ShopCore.ServiceInterface
 {
@@ -16,6 +11,8 @@ namespace ShopCore.ServiceInterface
          Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos);
 
         Task<FileToApi> RemoveImageFromApi(FileToApiDto dto);
+
+        void UploadFilesToDatabase(RealEstateDto dto, RealEstate domain);
 
 
     }

@@ -1,4 +1,6 @@
-﻿namespace Shop.Models.RealEstate
+﻿using Shop.Models.Spaceship;
+
+namespace Shop.Models.RealEstate
 {
     public class RealEstateDetailsViewModel
     {
@@ -11,7 +13,11 @@
 
         //database
         public DateTime BuiltInYear { get; set; }
+
+       
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+        public List<ImageToDatabaseViewModel> Image { get; set; }
+     = new List<ImageToDatabaseViewModel>();
     }
 }
