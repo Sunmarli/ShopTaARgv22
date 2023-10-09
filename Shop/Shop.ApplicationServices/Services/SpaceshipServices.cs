@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Shop.data;
+using Shop.Data;
 using ShopCore.Domain;
 using ShopCore.Dto;
 using ShopCore.ServiceInterface;

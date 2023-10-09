@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.data;
+
 using Shop.Models.Spaceship;
 using ShopCore.Dto;
 using ShopCore.ServiceInterface;
@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using Shop.ApplicationServices.Services;
+using Shop.Data;
 
 namespace Shop.Controllers
 {

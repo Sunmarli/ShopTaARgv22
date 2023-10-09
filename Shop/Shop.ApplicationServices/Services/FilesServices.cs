@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
-using Shop.data;
+using Shop.Data;
 using ShopCore.Domain;
 using ShopCore.Dto;
 using ShopCore.ServiceInterface;

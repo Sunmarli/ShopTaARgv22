@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopCore.ServiceInterface;
 using Shop.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
+using Shop.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

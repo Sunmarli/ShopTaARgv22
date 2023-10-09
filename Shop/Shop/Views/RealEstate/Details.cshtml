@@ -51,9 +51,13 @@
             @Html.DisplayFor(model => Model.UpdatedAt)
         </div>
 
-        @foreach (var images in Model.Image)
+        @foreach (var image in Model.Image)
         {
-            <partial name="_Images" model="images" />
+            // Convert the byte array to a data URI
+            var base64Image = Convert.ToBase64String(image.ImageData);
+            var imgSrc = $"data:image/jpeg;base64,{base64Image}";
+
+            <img src="@imgSrc" alt="Image" />
         }
         
     </dl>

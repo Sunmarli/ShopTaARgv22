@@ -6,7 +6,7 @@ using ShopCore.ServiceInterface;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
-
+using Shop.Data;
 
 namespace Shop.Controllers
 {
@@ -94,7 +94,7 @@ namespace Shop.Controllers
             }
 
 
-            var photos= await _context.FileToDatabase
+            var photos= await _context.FileToDatabases
                 .Where(x => x.RealEstateId == id)
                 .Select(y=>new ImageToDatabaseViewModel
                 {
