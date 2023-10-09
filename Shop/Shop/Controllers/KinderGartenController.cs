@@ -150,33 +150,32 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var realestate = await _realestateServices.GetAsync(id);
+            var kindergarten = await _kindergartenServices.GetAsync(id);
 
-            if (realestate == null)
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
-            var vm = new RealEstateDeleteViewModel();
+            var vm = new KinderGartenDeleteViewModel();
 
-            vm.Id = realestate.Id;
-            vm.Address = realestate.Address;
-            vm.SizeSqrM = realestate.SizeSqrM;
-            vm.RoomCount = realestate.RoomCount;
-            vm.Floor = realestate.Floor;
-            vm.BuildingType = realestate.BuildingType;
-            vm.BuiltInYear = realestate.BuiltInYear;
-            vm.CreatedAt = realestate.CreatedAt;
-            vm.UpdatedAt = realestate.UpdatedAt;
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KinderGartenName = kindergarten.KinderGartenName;
+            vm.Teacher = kindergarten.Teacher;
+          
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.UpdatedAt = kindergarten.UpdatedAt;
 
             return View(vm);
         }
         [HttpPost]
         public async Task<IActionResult> DeleteConfirmation(Guid id)
         {
-            var realestateId = await _realestateServices.Delete(id);
+            var kindergartenId = await _kindergartenServices.Delete(id);
 
-            if (realestateId == null)
+            if (kindergartenId == null)
             {
                 return RedirectToAction(nameof(Index));
             }
