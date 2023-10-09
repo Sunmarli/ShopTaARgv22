@@ -16,7 +16,7 @@ namespace Shop.ApplicationServices.Services
         private readonly ShopContext _context;
         private readonly IFileServices _fileServices;
 
-        public SpaceshKinderGartenServicesipServices
+        public KinderGartenServices
             (
                 ShopContext context,
              IFileServices fileServices
@@ -27,10 +27,10 @@ namespace Shop.ApplicationServices.Services
         }
 
 
-        public async Task<Spaceship> Create(SpaceshipDto dto)
+        public async Task<Kindergarten> Create(KindergartenDto dto)
         {
 
-            Spaceship spaceship = new Spaceship();
+            Kindergarten spaceship = new Kindergarten();
             spaceship.Id = Guid.NewGuid();
             spaceship.Name = dto.Name;
             spaceship.Type = dto.Type;
@@ -49,7 +49,7 @@ namespace Shop.ApplicationServices.Services
             return spaceship;
         }
 
-        public async Task<Spaceship> Update(SpaceshipDto dto)
+        public async Task<Kindergarten> Update(KindergartenDto dto)
         {
             var domain = new Spaceship();
 
@@ -70,7 +70,7 @@ namespace Shop.ApplicationServices.Services
             return domain;
         }
 
-        public async Task<Spaceship> Delete(Guid id)
+        public async Task<Kindergarten> Delete(Guid id)
         {
             var spaceshipId = await _context.Spaceships
                 .FirstOrDefaultAsync( x => x.Id == id);
