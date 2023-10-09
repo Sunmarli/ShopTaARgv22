@@ -89,16 +89,15 @@ namespace Shop.Controllers
 
             var vm = new KinderGartenDetailsViewModel();
 
-            vm.Id = realestate.Id;
-            vm.GroupName = realestate.Address;
-            vm.SizeSqrM = realestate.SizeSqrM;
-            vm.RoomCount = realestate.RoomCount;
-            vm.Floor = realestate.Floor;
-            vm.BuildingType = realestate.BuildingType;
-            vm.BuiltInYear = realestate.BuiltInYear;
-            vm.CreatedAt = realestate.CreatedAt;
-            vm.UpdatedAt = realestate.UpdatedAt;
-            vm.Image.AddRange(photos);
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.Address;
+            vm.ChildrenCount = kindergarten.SizeSqrM;
+            vm.RoomCount = kindergarten.RoomCount;
+            vm.Floor = kindergarten.Floor;
+        
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.UpdatedAt = kindergarten.UpdatedAt;
+            //vm.Image.AddRange(photos);
 
 
             return View(vm);
