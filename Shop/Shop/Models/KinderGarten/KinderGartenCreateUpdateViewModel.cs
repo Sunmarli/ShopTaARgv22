@@ -4,9 +4,9 @@
     {
         public Guid? Id { get; set; }
         public string GroupName { get; set; }
-        public float ChildrenCount { get; set; }
-        public int KinderGartenName { get; set; }
-        public int Teacher { get; set; }
+        public int ChildrenCount { get; set; }
+        public string KinderGartenName { get; set; }
+        public string Teacher { get; set; }
   
         //database
      
