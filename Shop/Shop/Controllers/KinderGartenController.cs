@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
 using Shop.Models.KinderGarten;
+using ShopCore.Domain;
 
 namespace Shop.Controllers
 {
@@ -85,15 +86,13 @@ namespace Shop.Controllers
             }
 
 
-       
-
             var vm = new KinderGartenDetailsViewModel();
 
             vm.Id = kindergarten.Id;
-            vm.GroupName = kindergarten.Address;
-            vm.ChildrenCount = kindergarten.SizeSqrM;
-            vm.RoomCount = kindergarten.RoomCount;
-            vm.Floor = kindergarten.Floor;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KinderGartenName = kindergarten.KinderGartenName;
+            vm.Teacher = kindergarten.Teacher;
         
             vm.CreatedAt = kindergarten.CreatedAt;
             vm.UpdatedAt = kindergarten.UpdatedAt;
@@ -106,43 +105,40 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var realestate = await _realestateServices.GetAsync(id);
-            if (realestate == null)
+            var kindergarten = await _kindergartenServices.GetAsync(id);
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
-            var vm = new RealEstateCreateUpdateViewModel();
+            var vm = new KinderGartenCreateUpdateViewModel();
 
-            vm.Id = realestate.Id;
-            vm.Address = realestate.Address;
-            vm.SizeSqrM = realestate.SizeSqrM;
-            vm.RoomCount = realestate.RoomCount;
-            vm.Floor = realestate.Floor;
-            vm.BuildingType = realestate.BuildingType;
-            vm.BuiltInYear = realestate.BuiltInYear;
-            vm.CreatedAt = realestate.CreatedAt;
-            vm.UpdatedAt = realestate.UpdatedAt;
+            vm.Id = kindergarten.Id;
+            vm.GroupName = kindergarten.GroupName;
+            vm.ChildrenCount = kindergarten.ChildrenCount;
+            vm.KinderGartenName = kindergarten.KinderGartenName;
+           
+            vm.CreatedAt = kindergarten.CreatedAt;
+            vm.UpdatedAt = kindergarten.UpdatedAt;
 
             return View("CreateUpdate", vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm)
+        public async Task<IActionResult> Update(KinderGartenCreateUpdateViewModel vm)
         {
-            var dto = new RealEstateDto()
+            var dto = new KindergartenDto()
             {
                 Id = vm.Id,
-                Address = vm.Address,
-                SizeSqrM = vm.SizeSqrM,
-                RoomCount = vm.RoomCount,
-                Floor = vm.Floor,
-                BuildingType = vm.BuildingType,
-                BuiltInYear = vm.BuiltInYear,
+                GroupName = vm.GroupName,
+                ChildrenCount = vm.ChildrenCount,
+                KinderGartenName = vm.KinderGartenName,
+                Teacher = vm.Teacher,
+                
                 CreatedAt = vm.CreatedAt,
                 UpdatedAt = vm.UpdatedAt,
             };
-            var result = await _realestateServices.Update(dto);
+            var result = await _kindergartenServices.Update(dto);
 
             if (result == null)
             {
