@@ -7,6 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
+using Shop.Models.KinderGarten;
 
 namespace Shop.Controllers
 {
@@ -14,29 +15,29 @@ namespace Shop.Controllers
     public class KinderGartenController : Controller
     {
         private readonly ShopContext _context;
-        private readonly IRealEstateServices _realestateServices;
+        private readonly IKindergartenServices _kindergartenServices;
 
         public KinderGartenController
             (
             ShopContext context,
-            IRealEstateServices realEstateServices
+            IKindergartenServices kindergartenServices
             )
         {
             _context = context;
-            _realestateServices = realEstateServices;
+            _kindergartenServices = kindergartenServices;
         }
 
         public IActionResult Index()
         {
-            var result = _context.RealEstates
-                .Select(x => new RealEstateIndexViewModel
+            var result = _context.Kindergarten
+                .Select(x => new KinderGartenIndexViewModel
                 {
                     Id = x.Id,
-                    Address = x.Address,
-                    SizeSqrM = x.SizeSqrM,
-                    RoomCount = x.RoomCount,
-                    Floor = x.Floor,
-                    BuildingType = x.BuildingType,
+                    GroupName = x.GroupName,
+                    ChildrenCount = x.ChildrenCount,
+                    KinderGartenName = x.KinderGartenName,
+                    Teacher = x.Teacher,
+                    
                 });
             return View(result);
         }
@@ -44,36 +45,26 @@ namespace Shop.Controllers
         [HttpGet]
         public IActionResult Create()
         {
-            RealEstateCreateUpdateViewModel realestate = new RealEstateCreateUpdateViewModel();
+            KinderGartenCreateUpdateViewModel kindergarten = new KinderGartenCreateUpdateViewModel();
 
-            return View("CreateUpdate", realestate);
+            return View("CreateUpdate", kindergarten);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(RealEstateCreateUpdateViewModel vm)
+        public async Task<IActionResult> Create(KinderGartenCreateUpdateViewModel vm)
         {
-            var dto = new RealEstateDto()
+            var dto = new KindergartenDto()
             {
                 Id = vm.Id,
-                Address = vm.Address,
-                SizeSqrM = vm.SizeSqrM,
-                RoomCount = vm.RoomCount,
-                Floor = vm.Floor,
-                BuildingType = vm.BuildingType,
-                BuiltInYear = vm.BuiltInYear,
-                Files=vm.Files,
-                Image=vm.Image.Select(x=>new FileToDatabaseDto
-                {
-                    Id=x.ImageId,
-                    ImageData = x.ImageData,
-                    ImageTitle = x.ImageTitle,
-                    RealEstateId = x.RealEstateId
-
-
-                }).ToArray()
+                GroupName = vm.GroupName,
+                ChildrenCount = vm.ChildrenCount,
+                KinderGartenName = vm.KinderGartenName,
+                Teacher = vm.Teacher,
+                
+                
 
             };
-            var result = await _realestateServices.Create(dto);
+            var result = await _kindergartenServices.Create(dto);
 
             if (result == null)
             {
@@ -86,30 +77,20 @@ namespace Shop.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-            var realestate = await _realestateServices.GetAsync(id);
+            var kindergarten = await _kindergartenServices.GetAsync(id);
 
-            if (realestate == null)
+            if (kindergarten == null)
             {
                 return NotFound();
             }
 
 
-            var photos= await _context.FileToDatabases
-                .Where(x => x.RealEstateId == id)
-                .Select(y=>new ImageToDatabaseViewModel
-                {
-                    RealEstateId=y.Id,
-                    ImageId =y.Id,
-                    ImageData=y.ImageData,  
-                    ImageTitle =y.ImageTitle,
-                    Image= string.Format("data:image/gif;base64,{0}",Convert.ToBase64String(y.ImageData))
-                }).ToArrayAsync();
+       
 
-
-            var vm = new RealEstateDetailsViewModel();
+            var vm = new KinderGartenDetailsViewModel();
 
             vm.Id = realestate.Id;
-            vm.Address = realestate.Address;
+            vm.GroupName = realestate.Address;
             vm.SizeSqrM = realestate.SizeSqrM;
             vm.RoomCount = realestate.RoomCount;
             vm.Floor = realestate.Floor;
