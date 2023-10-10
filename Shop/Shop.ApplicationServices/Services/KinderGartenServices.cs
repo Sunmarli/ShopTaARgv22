@@ -23,7 +23,7 @@ namespace Shop.ApplicationServices.Services
             )
         {
             _context = context;
-            //_fileServices = fileServices;
+            _fileServices = fileServices;
         }
 
 

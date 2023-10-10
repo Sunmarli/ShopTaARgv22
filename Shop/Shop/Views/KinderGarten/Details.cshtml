@@ -42,15 +42,7 @@
             @Html.DisplayFor(model => Model.UpdatedAt)
         </div>
 
-        @foreach (var image in Model.Image)
-        {
-            // Convert the byte array to a data URI
-            var base64Image = Convert.ToBase64String(image.ImageData);
-            var imgSrc = $"data:image/jpeg;base64,{base64Image}";
-
-            <img src="@imgSrc" alt="Image" />
-        }
-        
+   
     </dl>
     <hr />
     <a asp-action="index" class="btn btn-primary">Index</a>

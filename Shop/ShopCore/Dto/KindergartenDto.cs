@@ -26,9 +26,11 @@ namespace ShopCore.Dto
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        public List<IFormFile> Files { get; set; }
+        //public List<IFormFile> Files { get; set; }
 
-        public IEnumerable<FileToApiDto> Image { get; set; }
-            = new List<FileToApiDto>();
-            }
+        ////public IEnumerable<FileToApiDto> Image { get; set; }
+        //    = new List<FileToApiDto>();
+        //    }
+    }
 }
+

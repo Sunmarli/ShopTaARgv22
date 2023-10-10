@@ -98,7 +98,7 @@ namespace Shop.Controllers
             //vm.Image.AddRange(photos);
 
 
-            return View(vm);
+            return View("CreateUpdate" ,vm);
         }
 
         [HttpGet]
