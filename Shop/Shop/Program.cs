@@ -16,7 +16,7 @@ builder.Services.AddDbContext<ShopContext>(options =>
 builder.Services.AddScoped<ISpaceshipServices, SpaceshipServices>();
 builder.Services.AddScoped<IFileServices, FilesServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
-
+builder.Services.AddScoped<IKindergartenServices, KinderGartenServices>();
 
 var app = builder.Build();
 

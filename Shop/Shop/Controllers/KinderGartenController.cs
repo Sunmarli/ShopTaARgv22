@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.data;
-using Shop.Models.RealEstate;
+
 using ShopCore.Dto;
 using ShopCore.ServiceInterface;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
 using Shop.Models.KinderGarten;
@@ -30,7 +29,7 @@ namespace Shop.Controllers
 
         public IActionResult Index()
         {
-            var result = _context.Kindergarten
+            var result = _context.KinderGartens
                 .Select(x => new KinderGartenIndexViewModel
                 {
                     Id = x.Id,
