@@ -14,16 +14,15 @@ namespace Shop.ApplicationServices.Services
     public class KinderGartenServices : IKindergartenServices
     {
         private readonly ShopContext _context;
-        private readonly IFileServices _fileServices;
-
+     
         public KinderGartenServices
             (
-                ShopContext context,
-             IFileServices fileServices
+                ShopContext context
+            
             )
         {
             _context = context;
-            _fileServices = fileServices;
+           
         }
 
 

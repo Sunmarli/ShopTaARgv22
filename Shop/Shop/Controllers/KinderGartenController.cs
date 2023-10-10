@@ -97,8 +97,8 @@ namespace Shop.Controllers
             vm.UpdatedAt = kindergarten.UpdatedAt;
             //vm.Image.AddRange(photos);
 
-
-            return View("CreateUpdate" ,vm);
+            return View(vm);
+            
         }
 
         [HttpGet]

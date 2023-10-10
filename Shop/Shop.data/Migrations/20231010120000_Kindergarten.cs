@@ -9,18 +9,6 @@ namespace Shop.data.Migrations
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_FileToDatabase",
-                table: "FileToDatabase");
-
-            migrationBuilder.RenameTable(
-                name: "FileToDatabase",
-                newName: "FileToDatabases");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_FileToDatabases",
-                table: "FileToDatabases",
-                column: "Id");
 
             migrationBuilder.CreateTable(
                 name: "KinderGartens",
@@ -45,18 +33,7 @@ namespace Shop.data.Migrations
             migrationBuilder.DropTable(
                 name: "KinderGartens");
 
-            migrationBuilder.DropPrimaryKey(
-                name: "PK_FileToDatabases",
-                table: "FileToDatabases");
-
-            migrationBuilder.RenameTable(
-                name: "FileToDatabases",
-                newName: "FileToDatabase");
-
-            migrationBuilder.AddPrimaryKey(
-                name: "PK_FileToDatabase",
-                table: "FileToDatabase",
-                column: "Id");
+         
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Shop.data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "FileToDatabase",
+                name: "FileToDatabases",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -27,7 +27,7 @@ namespace Shop.data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FileToDatabase");
+                name: "FileToDatabases");
         }
     }
 }

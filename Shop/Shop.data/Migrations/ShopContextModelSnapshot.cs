@@ -37,7 +37,7 @@ namespace Shop.data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToApis");
+                    b.ToTable("FileToApis", (string)null);
                 });
 
             modelBuilder.Entity("ShopCore.Domain.FileToDatabase", b =>
@@ -59,39 +59,7 @@ namespace Shop.data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToDatabases");
-                });
-
-            modelBuilder.Entity("ShopCore.Domain.Kindergarten", b =>
-                {
-                    b.Property<Guid?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ChildrenCount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("GroupName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("KinderGartenName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Teacher")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("KinderGartens");
+                    b.ToTable("FileToDatabase", (string)null);
                 });
 
             modelBuilder.Entity("ShopCore.Domain.RealEstate", b =>
@@ -128,7 +96,7 @@ namespace Shop.data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RealEstates");
+                    b.ToTable("RealEstates", (string)null);
                 });
 
             modelBuilder.Entity("ShopCore.Domain.Spaceship", b =>
@@ -169,7 +137,7 @@ namespace Shop.data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceships");
+                    b.ToTable("Spaceships", (string)null);
                 });
 #pragma warning restore 612, 618
         }
