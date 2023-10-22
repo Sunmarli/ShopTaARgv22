@@ -7,6 +7,8 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 using System.Xml.Linq;
 using Microsoft.EntityFrameworkCore;
 using Shop.Data;
+using static System.Net.Mime.MediaTypeNames;
+using Shop.ApplicationServices.Services;
 
 namespace Shop.Controllers
 {
@@ -15,15 +17,19 @@ namespace Shop.Controllers
     {
         private readonly ShopContext _context;
         private readonly IRealEstateServices _realestateServices;
+        private readonly IFileServices _fileServices;
 
         public RealEstateController
             (
             ShopContext context,
-            IRealEstateServices realEstateServices
+            IRealEstateServices realEstateServices,
+            IFileServices fileservices
+
             )
         {
             _context = context;
             _realestateServices = realEstateServices;
+            _fileServices = fileservices;
         }
 
         public IActionResult Index()
@@ -125,12 +131,23 @@ namespace Shop.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
+
         {
             var realestate = await _realestateServices.GetAsync(id);
             if (realestate == null)
             {
                 return NotFound();
             }
+            var photos = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
+               .Select(y => new ImageToDatabaseViewModel
+               {
+                   RealEstateId = y.Id,
+                   ImageId = y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+               }).ToArrayAsync();
 
             var vm = new RealEstateCreateUpdateViewModel();
 
@@ -143,6 +160,7 @@ namespace Shop.Controllers
             vm.BuiltInYear = realestate.BuiltInYear;
             vm.CreatedAt = realestate.CreatedAt;
             vm.UpdatedAt = realestate.UpdatedAt;
+            vm.Image.AddRange(photos);
 
             return View("CreateUpdate", vm);
         }
@@ -150,25 +168,31 @@ namespace Shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(RealEstateCreateUpdateViewModel vm)
         {
-            var dto = new RealEstateDto()
+            var dto = new RealEstateDto();
+            dto.Id = vm.Id;
+            dto.Address = vm.Address;
+            dto.SizeSqrM = vm.SizeSqrM;
+            dto.RoomCount = vm.RoomCount;
+            dto.Floor = vm.Floor;
+            dto.BuildingType = vm.BuildingType;
+            dto.BuiltInYear = vm.BuiltInYear;
+            dto.CreatedAt = vm.CreatedAt;
+            dto.UpdatedAt = vm.UpdatedAt;
+            dto.Files = vm.Files;
+            dto.Image = vm.Image.Select(x => new FileToDatabaseDto
             {
-                Id = vm.Id,
-                Address = vm.Address,
-                SizeSqrM = vm.SizeSqrM,
-                RoomCount = vm.RoomCount,
-                Floor = vm.Floor,
-                BuildingType = vm.BuildingType,
-                BuiltInYear = vm.BuiltInYear,
-                CreatedAt = vm.CreatedAt,
-                UpdatedAt = vm.UpdatedAt,
-            };
+                Id = x.ImageId,
+                ImageData = x.ImageData,
+                ImageTitle = x.ImageTitle,
+                RealEstateId = x.RealEstateId
+            }).ToArray();
+
             var result = await _realestateServices.Update(dto);
 
             if (result == null)
             {
                 return RedirectToAction(nameof(Index));
             }
-
             return RedirectToAction(nameof(Index), vm);
         }
         [HttpGet]
@@ -181,6 +205,17 @@ namespace Shop.Controllers
                 return NotFound();
             }
 
+            var photos = await _context.FileToDatabases
+                .Where(x => x.RealEstateId == id)
+                .Select(y => new ImageToDatabaseViewModel
+                {
+                    RealEstateId = y.Id,
+                    ImageId = y.Id,
+                    ImageData = y.ImageData,
+                    ImageTitle = y.ImageTitle,
+                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
+                }).ToArrayAsync();
+
             var vm = new RealEstateDeleteViewModel();
 
             vm.Id = realestate.Id;
@@ -192,7 +227,7 @@ namespace Shop.Controllers
             vm.BuiltInYear = realestate.BuiltInYear;
             vm.CreatedAt = realestate.CreatedAt;
             vm.UpdatedAt = realestate.UpdatedAt;
-
+            vm.ImageToDatabase.AddRange(photos);
             return View(vm);
         }
         [HttpPost]
@@ -206,6 +241,47 @@ namespace Shop.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(ImageToDatabaseViewModel file)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+
+                Id = file.ImageId
+            };
+
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+
+
+            if (image == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImages(ImageToDatabaseViewModel file)
+        {
+
+            var dto = new FileToDatabaseDto()
+
+            {
+                Id = file.ImageId
+            };
+
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+
+
+            if (image == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+
+        }
     }
-}
+}    
 
