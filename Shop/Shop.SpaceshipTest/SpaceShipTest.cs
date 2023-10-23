@@ -121,6 +121,24 @@ namespace Shop.SpaceshipTest
         }
 
 
+        [Fact]
+        public async Task Should_UpdateSpaceship_WhenUpdateDataVersion2()
+        {
+            SpaceshipDto dto= MockSpaceshipData();
+            var createSpaceship= await Svc<ISpaceshipServices>().Create(dto);
+
+
+            SpaceshipDto update = MockUpdateSpaceshipData();
+            var updatespaceship = await Svc<ISpaceshipServices>().Update(update);
+
+            Assert.DoesNotMatch(updatespaceship.Name, createSpaceship.Name);
+
+            Assert.NotEqual(updatespaceship.EnginePower, createSpaceship.EnginePower);
+            Assert.Equal(updatespaceship.Crew, createSpaceship.Crew);
+            Assert.DoesNotMatch(updatespaceship.Passengers.ToString(), createSpaceship.Passengers.ToString());
+
+
+        }
         private SpaceshipDto MockSpaceshipData()
         {
             SpaceshipDto spaceship = new()
@@ -138,6 +156,24 @@ namespace Shop.SpaceshipTest
             };
             return spaceship;
 
+        }
+
+        private SpaceshipDto MockUpdateSpaceshipData()
+        {
+            SpaceshipDto update = new()
+            {
+                Name = "AA",
+                Type = "AA",
+                Passengers = 500,
+                EnginePower = 500,
+                Crew = 123,
+                Company = "AA",
+                CargoWeight = 500,
+
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+            };
+            return update;
         }
 
     }
