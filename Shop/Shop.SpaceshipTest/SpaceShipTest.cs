@@ -106,7 +106,7 @@ namespace Shop.SpaceshipTest
             spaceship.Type = "Asdd";
             spaceship.Passengers = 1234;
             spaceship.EnginePower = 10000;
-            spaceship.Crew = 10;
+            spaceship.Crew = 123;
             spaceship.Company = "Targv";
             spaceship.CargoWeight = 9000;
             spaceship.CreatedAt = DateTime.Now.AddYears(1);
@@ -115,6 +115,9 @@ namespace Shop.SpaceshipTest
             await Svc<ISpaceshipServices>().Update(dto);
 
             Assert.Equal(spaceship.Id, guid);
+            Assert.NotEqual(spaceship.EnginePower, dto.EnginePower);
+            Assert.Equal(spaceship.Crew, dto.Crew);
+            Assert.DoesNotMatch(spaceship.Passengers.ToString(), dto.Passengers.ToString());    
         }
 
 
