@@ -1,4 +1,5 @@
-﻿using ShopCore.Dto;
+﻿using ShopCore.Domain;
+using ShopCore.Dto;
 using ShopCore.ServiceInterface;
 using System;
 using System.Collections.Generic;
@@ -76,6 +77,45 @@ namespace Shop.SpaceshipTest
             Assert.Equal(result, addspaceship);
         }
 
+        [Fact]
+        public async Task SouldNot_DeleteByIdSpaceship_WhenDidNotDeleteSpaceship()
+        {
+            SpaceshipDto spaceship=MockSpaceshipData();
+            var addSpaceship = await Svc<ISpaceshipServices>().Create(spaceship);
+            var addSpaceship2 = await Svc<ISpaceshipServices>().Create(spaceship);
+
+            var result= await Svc<ISpaceshipServices>().Delete((Guid)addSpaceship2.Id);
+
+            Assert.NotEqual(result, addSpaceship);
+
+        }
+
+
+        [Fact]
+        public async Task Should_UpdateSpaceship_WhenUpdateData()
+        {
+            var guid = new Guid("67457d6e-854d-4112-b467-776ef280574c");
+            //old data
+            Spaceship spaceship = new Spaceship();
+
+            //new data
+            SpaceshipDto dto=MockSpaceshipData();
+
+            spaceship.Id = Guid.Parse("67457d6e-854d-4112-b467-776ef280574c");
+            spaceship.Name= "Name";
+            spaceship.Type = "Asdd";
+            spaceship.Passengers = 1234;
+            spaceship.EnginePower = 10000;
+            spaceship.Crew = 10;
+            spaceship.Company = "Targv";
+            spaceship.CargoWeight = 9000;
+            spaceship.CreatedAt = DateTime.Now.AddYears(1);
+            spaceship.ModifiedAt = DateTime.Now.AddYears(1);
+
+            await Svc<ISpaceshipServices>().Update(dto);
+
+            Assert.Equal(spaceship.Id, guid);
+        }
 
 
         private SpaceshipDto MockSpaceshipData()
