@@ -7,7 +7,7 @@ using ShopCore.ServiceInterface;
 using Shop.Data;
 using Shop.SpaceshipTest.Macros;
 using Shop.SpaceshipTest.Mock;
-using ShopCore.ServiceInterface;
+
 
 namespace Shop.SpaceshipTest
 {
@@ -31,7 +31,6 @@ namespace Shop.SpaceshipTest
          {
             return serviceProvider.GetService<T>();
 
-
         }
 
         protected T Macro<T>() where T: IMacros
@@ -40,16 +39,11 @@ namespace Shop.SpaceshipTest
         }
 
 
-
         public virtual void SetupServices (IServiceCollection services)
         {
             services.AddScoped<ISpaceshipServices, SpaceshipServices>();
             services.AddScoped<IFileServices, FilesServices>();
             services.AddScoped<IHostEnvironment, MockHostEnvironment>();
-
-
-
-
 
             services.AddDbContext<ShopContext>(x =>
             {

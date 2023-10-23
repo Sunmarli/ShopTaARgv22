@@ -13,8 +13,6 @@ namespace Shop.SpaceshipTest
         [Fact]
         public async Task ShouldNot_AddEmptySpaceship_WhenReturnresult()
         {
-
-
             SpaceshipDto dto= new SpaceshipDto(); 
 
             dto.Name = "Name";
@@ -53,6 +51,18 @@ namespace Shop.SpaceshipTest
             Assert.NotEqual(guid, wrongGuid);
         }
 
+        [Fact]
+        public async Task Should_GetByidSpaceship_WhenReturnsEqual()
+        {
+
+            Guid databaseguid = Guid.Parse("afd172f9-06ea-41df-834b-1b4a0caca842");
+            Guid getGuid = Guid.Parse("afd172f9-06ea-41df-834b-1b4a0caca");
+
+            //act
+            await Svc<ISpaceshipServices>().GetAsync(getGuid);
+            //assert
+            Assert.Equal(databaseguid, getGuid);
+        }
 
 
     }
