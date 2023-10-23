@@ -3,6 +3,7 @@ using ShopCore.ServiceInterface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -56,7 +57,7 @@ namespace Shop.SpaceshipTest
         {
 
             Guid databaseguid = Guid.Parse("afd172f9-06ea-41df-834b-1b4a0caca842");
-            Guid getGuid = Guid.Parse("afd172f9-06ea-41df-834b-1b4a0caca");
+            Guid getGuid = Guid.Parse("afd172f9-06ea-41df-834b-1b4a0caca842");
 
             //act
             await Svc<ISpaceshipServices>().GetAsync(getGuid);
@@ -64,6 +65,37 @@ namespace Shop.SpaceshipTest
             Assert.Equal(databaseguid, getGuid);
         }
 
+        [Fact]
+        public async Task Should_DeleteByIdSpaceship_WhenDeleteSpaceship()
+        {
+            SpaceshipDto spaceship = MockSpaceshipData();
+
+            var addspaceship = await Svc<ISpaceshipServices>().Create(spaceship);
+            var result = await Svc<ISpaceshipServices>().Delete((Guid)addspaceship.Id);
+
+            Assert.Equal(result, addspaceship);
+        }
+
+
+
+        private SpaceshipDto MockSpaceshipData()
+        {
+            SpaceshipDto spaceship = new()
+            {
+            Name = "Name",
+            Type = "Type",
+            Passengers = 123,
+            EnginePower = 123,
+            Crew = 123,
+            Company = "asd",
+            CargoWeight = 123,
+
+            CreatedAt = DateTime.Now,
+            ModifiedAt = DateTime.Now,
+            };
+            return spaceship;
+
+        }
 
     }
 }
