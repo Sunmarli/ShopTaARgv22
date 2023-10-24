@@ -139,6 +139,40 @@ namespace Shop.SpaceshipTest
 
 
         }
+        [Fact]
+        public async Task ShouldNot_UpdateSpaceship_WhenNotUdateData()
+        {
+            SpaceshipDto dto = MockSpaceshipData();
+            await Svc<ISpaceshipServices>().Create(dto);
+
+
+            SpaceshipDto nullUpdate = MockNullSpaceship();
+            await Svc<ISpaceshipServices>().Update(nullUpdate);
+
+            var nullId= nullUpdate.Id;
+
+            Assert.True(dto.Id== nullId);
+
+        }
+
+        private SpaceshipDto MockNullSpaceship()
+        {
+            SpaceshipDto nullDto = new()
+            {
+                Id=null,
+                Name = "Name123",
+                Type = "Type123",
+                Passengers = 123,
+                EnginePower = 123,
+                Crew = 123,
+                Company = "123asd",
+                CargoWeight = 123,
+
+                CreatedAt = DateTime.Now.AddYears(1),
+                ModifiedAt = DateTime.Now.AddYears(1),
+            };
+            return nullDto;
+        }
         private SpaceshipDto MockSpaceshipData()
         {
             SpaceshipDto spaceship = new()
