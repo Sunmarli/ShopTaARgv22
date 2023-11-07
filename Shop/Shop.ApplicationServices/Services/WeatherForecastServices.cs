@@ -1,14 +1,17 @@
-﻿using ShopCore.Dto.OpenWeatherDtos;
+﻿using Nancy.Json;
+using ShopCore.Dto.OpenWeatherDtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ShopCore;
+using ShopCore.ServiceInterface;
 
 namespace Shop.ApplicationServices.Services
 {
-    public class WeatherForecastServices
+    public class WeatherForecastServices: IWeatherForecastServices
 	{
 		public async Task<OpenWeatherResultDto> OpenWeatherResult(OpenWeatherResultDto dto)
 		{
@@ -17,6 +20,16 @@ namespace Shop.ApplicationServices.Services
 
 			using (WebClient client= new WebClient())
 			{
+				string json=client.DownloadString(url);
+				OpenWeatherResponseRootDto weatherResult = new JavaScriptSerializer().Deserialize<OpenWeatherResponseRootDto>(json);
+
+				dto.City = weatherResult.CityName;
+				dto.Temp = weatherResult.Main.Temp;
+				dto.Feels_like = weatherResult.Main.Feels_like;
+				dto.Humidity= weatherResult.Main.Humidity;
+				dto.Pressure= weatherResult.Main.Pressure;
+				dto.windSpeed = weatherResult.Wind.windSpeed;
+				dto.Description = weatherResult.Weather[0].Description;
 
 			}
 

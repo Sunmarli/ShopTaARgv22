@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopCore.Dto.OpenWeatherDtos
 {
-    internal class OpenWeatherResponseRootDto
+		public class OpenWeatherResponseRootDto
     {
         [JsonPropertyName("coord")]
         public Coord Coord { get; set; }
