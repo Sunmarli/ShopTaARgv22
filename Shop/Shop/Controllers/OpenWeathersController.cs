@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Models.OpenWeathers;
 using ShopCore.ServiceInterface;
 
 namespace Shop.Controllers
@@ -14,6 +15,16 @@ namespace Shop.Controllers
 		public IActionResult Index()
 		{
 			return View();
+		}
+		[HttpPost]
+		public IActionResult SearchCity(SearchCityViewModel model)
+		{
+			if (ModelState.IsValid){
+				return RedirectToAction("City", "OpenWeathers", new {city=model.CityName});
+
+			}
+			
+			return View(model);
 		}
 	}
 }
