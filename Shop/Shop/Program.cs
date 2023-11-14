@@ -18,6 +18,8 @@ builder.Services.AddScoped<IFileServices, FilesServices>();
 builder.Services.AddScoped<IRealEstateServices, RealEstateServices>();
 builder.Services.AddScoped<IKindergartenServices, KinderGartenServices>();
 builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
+builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
+
 
 var app = builder.Build();
 

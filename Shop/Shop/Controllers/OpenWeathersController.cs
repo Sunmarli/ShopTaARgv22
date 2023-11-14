@@ -32,7 +32,7 @@ namespace Shop.Controllers
 		{
 			OpenWeatherResultDto dto = new();
 			dto.City = city;
-			_weatherForecastServices.OpenWeatherResult(dto);
+			_weatherForecastServices.OpenWeatherResult(dto); 
 			OpenWeatherViewModel vm = new();
 
 			vm.City = dto.City;
