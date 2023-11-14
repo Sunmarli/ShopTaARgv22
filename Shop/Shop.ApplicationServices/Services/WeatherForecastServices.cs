@@ -28,7 +28,7 @@ namespace Shop.ApplicationServices.Services
 				dto.Feels_like = weatherResult.Main.Feels_like;
 				dto.Humidity= weatherResult.Main.Humidity;
 				dto.Pressure= weatherResult.Main.Pressure;
-				dto.windSpeed = weatherResult.Wind.windSpeed;
+				dto.windSpeed = weatherResult.Wind.speed;
 				dto.Description = weatherResult.Weather[0].Description;
 
 			}

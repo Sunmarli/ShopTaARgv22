@@ -4,10 +4,10 @@ namespace ShopCore.Dto.OpenWeatherDtos
 {
 	public class Wind
 	{
-		[JsonPropertyName("windSpeed")]
-		public double windSpeed { get; set; }
+		[JsonPropertyName("speed")]
+		public double speed { get; set; }
 
-		[JsonPropertyName("windDeg")]
+		[JsonPropertyName("deg")]
 		public int windDeg { get; set; }
 		[JsonPropertyName("gust")]
 		public int gust { get; set; }
