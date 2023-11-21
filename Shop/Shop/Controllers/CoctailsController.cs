@@ -22,13 +22,13 @@ namespace Shop.Controllers
 			[HttpPost]
 			public IActionResult SearchCoctail(CoctailSearchViewModel model)
 			{
-				if (ModelState.IsValid)
-				{
-					return RedirectToAction("Coctail", "Coctails", new { coctail = model.strDrink });
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Cocktail", "Cocktails", new { cocktail = model.SearchCocktail });
+            }
 
-				}
 
-				return View(model);
+            return View(model);
 			}
 		[HttpGet]
 		public IActionResult Coctail(string coctail)

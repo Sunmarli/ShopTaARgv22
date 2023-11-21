@@ -11,12 +11,13 @@ namespace Shop.ApplicationServices.Services
 	{
 		public async Task<CoctailResultDto> CoctailResult(CoctailResultDto dto)
 		{
-			//string idOpenWeather = "4f6b9f481986443efd613140d2ba3440";
-			string url = $"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={dto.strDrink}";
+            //string idOpenWeather = "4f6b9f481986443efd613140d2ba3440";
+            string apiKey = "1";
+            string apiCallUrl = $"https://www.thecocktaildb.com/api/json/v1/{apiKey}/search.php?s={dto.strDrink}";
 
-			using (WebClient client = new WebClient())
+            using (WebClient client = new WebClient())
 			{
-				string json = client.DownloadString(url);
+				string json = client.DownloadString(apiCallUrl);
 				CoctailResponseRootDto coctailResult = new JavaScriptSerializer().Deserialize<CoctailResponseRootDto>(json);
 
 				dto.idDrink = coctailResult.drinks[0].idDrink;

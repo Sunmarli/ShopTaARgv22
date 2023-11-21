@@ -1,0 +1,177 @@
+﻿
+@model Shop.Models.Coctails.CoctailViewModel
+
+<div class="container">
+    <h2>Discover new drinks</h2>
+    <h2>@Html.DisplayFor(model => model.strDrink)</h2>
+    <hr />
+    <dl class="row text-dark">
+        @if (Model.idDrink != null && !String.IsNullOrEmpty(Model.idDrink))
+        {
+            <div class="form-group row">
+                <label asp-for="idDrink" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.idDrink)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.idDrink)
+        }
+
+        @if (Model.strDrinkAlternate != null && !String.IsNullOrEmpty(Model.strDrinkAlternate))
+        {
+            <div class="form-group row">
+                <label asp-for="strDrinkAlternate" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strDrinkAlternate)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strDrinkAlternate)
+        }
+
+        @if (Model.strTags != null && !String.IsNullOrEmpty(Model.strTags))
+        {
+            <div class="form-group row">
+                <label asp-for="strTags" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strTags)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strTags)
+        }
+
+        @if (Model.strVideo != null && !String.IsNullOrEmpty(Model.strVideo))
+        {
+            <div class="form-group row">
+                <label asp-for="strVideo" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strVideo)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strVideo)
+        }
+
+        @if (Model.strCategory != null && !String.IsNullOrEmpty(Model.strCategory))
+        {
+            <div class="form-group row">
+                <label asp-for="strCategory" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strCategory)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strCategory)
+        }
+
+        @if (Model.strIBA != null && !String.IsNullOrEmpty(Model.strIBA))
+        {
+            <div class="form-group row">
+                <label asp-for="strIBA" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strIBA)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strIBA)
+        }
+
+        @if (Model.strAlcoholic != null && !String.IsNullOrEmpty(Model.strAlcoholic))
+        {
+            <div class="form-group row">
+                <label asp-for="strAlcoholic" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strAlcoholic)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strAlcoholic)
+        }
+
+        @if (Model.strGlass != null && !String.IsNullOrEmpty(Model.strGlass))
+        {
+            <div class="form-group row">
+                <label asp-for="strGlass" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strGlass)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strGlass)
+        }
+
+        @if (Model.strIngredient1 != null && !String.IsNullOrEmpty(Model.strIngredient1))
+        {
+            <div class="form-group row">
+                <label asp-for="strIngredient1" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strIngredient1)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strIngredient1)
+        }
+
+        }
+
+    
+
+        @if (Model.strIngredient1 != null && !String.IsNullOrEmpty(Model.strIngredient1))
+        {
+            <div class="form-group row">
+                <label asp-for="strIngredient1" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strIngredient1)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strIngredient2)
+        }
+
+        @if (Model.strIngredient2 != null && !String.IsNullOrEmpty(Model.strIngredient2))
+        {
+            <div class="form-group row">
+                <label asp-for="strIngredient2" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strIngredient2)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strIngredient2)
+        }
+
+        @if (Model.strIngredient3 != null && !String.IsNullOrEmpty(Model.strIngredient3))
+        {
+            <div class="form-group row">
+                <label asp-for="strIngredient3" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.strIngredient3)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.strIngredient3)
+        }
+
+      
+
+        @if (Model.dateModified != null && !String.IsNullOrEmpty(Model.dateModified))
+        {
+            <div class="form-group row">
+                <label asp-for="dateModified" class="col-sm-2 col-form-label"></label>
+                @Html.DisplayFor(model => model.dateModified)
+            </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.dateModified)
+        }
+    </dl>
+</div>
+
+<div class="container">
+    <form method="get">
+        <button asp-controller="cocktails" asp-action="Index" class="btn btn-success">Index</button>
+    </form>
+</div>
