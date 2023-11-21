@@ -21,7 +21,13 @@ namespace Shop.ApplicationServices.Services
 				ChuckNorrisResponseRootDto chuckNorrisResult = new JavaScriptSerializer().Deserialize<ChuckNorrisResponseRootDto>(json);
 
 				dto.Value = chuckNorrisResult.Value;
-				
+				dto.Categories = chuckNorrisResult.Categories;
+				dto.CreatedAt = chuckNorrisResult.CreatedAt;
+				dto.IconUrl = chuckNorrisResult.IconUrl;
+				dto.Id = chuckNorrisResult.Id;
+				dto.UpdatedAt = chuckNorrisResult.UpdatedAt;
+				dto.Url = chuckNorrisResult.Url;
+				dto.Value = chuckNorrisResult.Value;
 
 			}
 

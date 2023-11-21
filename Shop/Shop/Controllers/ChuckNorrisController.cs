@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.ApplicationServices.Services;
+
 using Shop.Models.ChuckNorris;
-using Shop.Models.OpenWeathers;
+
 using ShopCore.Dto.ChuckNorrisDtos;
 using ShopCore.ServiceInterface;
 
@@ -23,23 +23,31 @@ namespace Shop.Controllers
 		[HttpPost]
 		public IActionResult GenerateJoke(JokeGeneratorViewModel model)
 		{
-			if (ModelState.IsValid)
+			//if (ModelState.IsValid)
 			{
+				//return RedirectToAction("Joke", "ChuckNorris");
 				return RedirectToAction("Joke", "ChuckNorris");
 
 			}
 
-			return View(model);
+			//return View(model);
 		}
 		[HttpGet]
-		public IActionResult Joke(string value)
+		public IActionResult Joke(string joke)
 		{
+
 			ChuckNorrisResultDto dto = new();
-			dto.Value = value;
+			dto.Value = joke;
 
 			_chuckNorrisServices.ChuckNorrisResult(dto);
 			ChuckNorrisViewModel vm = new();
 
+			vm.Categories = dto.Categories;
+			vm.CreatedAt = dto.CreatedAt;
+			vm.IconUrl = dto.IconUrl;
+			vm.Id = dto.Id;
+			vm.UpdatedAt = dto.UpdatedAt;
+			vm.Url = dto.Url;
 			vm.Value = dto.Value;
 
 			return View(vm);

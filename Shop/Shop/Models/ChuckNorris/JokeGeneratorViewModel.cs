@@ -2,8 +2,8 @@
 
 namespace Shop.Models.ChuckNorris
 {
-	public class JokeGeneratorViewModel : Controller
+	public class JokeGeneratorViewModel
 	{
-		
+		public string JokeName { get; set; }
 	}
 }
