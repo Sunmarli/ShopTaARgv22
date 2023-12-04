@@ -1,0 +1,62 @@
+﻿@model Shop.Models.AccuWeather.AccuWeatherViewModel
+
+@{
+    ViewData["Title"] = "Weather";
+}
+
+<div class="container">
+    <h2>Weather in city:</h2>
+    <h2>@Html.DisplayFor(model => model.City)</h2>
+    <hr />
+
+    <div class="form-group row">
+        <label asp-for="Key" class="col-sm-2 col-form-label">Key:</label>
+        @Html.DisplayFor(model => model.Key)
+    </div>
+    <div class="form-group row">
+        <label asp-for="City" class="col-sm-2 col-form-label">City:</label>
+        @Html.DisplayFor(model => model.City)
+    </div>
+    <div class="form-group row">
+        <label asp-for="Text" class="col-sm-2 col-form-label">Text:</label>
+        @Html.DisplayFor(model => model.Text)
+    </div>
+    <div class="form-group row">
+        <label asp-for="Minimum" class="col-sm-2 col-form-label">Minimum:</label>
+        @Html.DisplayFor(model => model.Minimum) °C
+    </div>
+    <div class="form-group row">
+        <label asp-for="Maximum" class="col-sm-2 col-form-label">Maximum:</label>
+        @Html.DisplayFor(model => model.Maximum) °C
+    </div>
+    <div class="form-group row">
+        <label asp-for="Date" class="col-sm-2 col-form-label">Date:</label>
+        @Html.DisplayFor(model => model.Date)
+    </div>
+    @*<div class="form-group row">
+    <label asp-for="Category" class="col-sm-2 col-form-label">Category:</label>
+    @Html.DisplayFor(model => model.Category)
+    </div>*@
+    <div class="form-group row">
+        <label asp-for="DayIconPhrase" class="col-sm-2 col-form-label">Day icon phrase:</label>
+        @Html.DisplayFor(model => model.DayIconPhrase) @*@Html.DisplayFor(model => model.DayIcon)*@
+    </div>
+    <div class="form-group row">
+        <label asp-for="NightIconPhrase" class="col-sm-2 col-form-label">Night icon phrase:</label>
+        @Html.DisplayFor(model => model.NightIconPhrase)@* @Html.DisplayFor(model => model.NightIcon)*@
+    </div>
+    <div class="form-group row">
+        <label asp-for="Sources" class="col-sm-2 col-form-label">Sources:</label>
+        @Html.DisplayFor(model => model.Sources)
+    </div>
+    <div class="form-group row">
+        <label asp-for="Link" class="col-sm-2 col-form-label">Link:</label>
+        @Html.DisplayFor(model => model.Link)
+    </div>
+    <div class="form-group row">
+        <label asp-for="MobileLink" class="col-sm-2 col-form-label">MobileLink:</label>
+        @Html.DisplayFor(model => model.MobileLink)
+    </div>
+
+</div>
+
