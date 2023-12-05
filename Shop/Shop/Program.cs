@@ -21,6 +21,7 @@ builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
 builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddScoped<ICoctailServices, CoctailServices>();
 builder.Services.AddScoped<IAccuWeatherServices, AccuWeatherServices>();
+builder.Services.AddScoped<IEmailServices, EmailServices>();
 
 
 var app = builder.Build();
