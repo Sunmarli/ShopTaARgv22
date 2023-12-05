@@ -33,10 +33,11 @@ namespace Shop.Controllers
 			};
 
 			_emailServices.SendEmail(dto);
-			return RedirectToAction(nameof(Index));
-
+			//return RedirectToAction(nameof(Index));
+			return View("SendEmail", vm);
 
 		}
+		
 
 	}
 }
