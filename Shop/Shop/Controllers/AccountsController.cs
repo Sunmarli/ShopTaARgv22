@@ -70,5 +70,86 @@ namespace Shop.Controllers
 
 			return View();
 		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public async Task<IActionResult> Login(/*string returnUrl*/)
+		{
+			LoginViewModel vm = new()
+			{
+				//ReturnUrl = returnUrl,
+				//ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+			};
+
+			return View(vm);
+		}
+		[HttpPost]
+		[AllowAnonymous]
+		public async Task<IActionResult> Login(LoginViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var user = await _userManager.FindByEmailAsync(model.Email);
+
+				if (user != null && !user.EmailConfirmed && (await _userManager.CheckPasswordAsync(user, model.Password)))
+				{
+					ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+					return View(model);
+				}
+
+				var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
+
+				if (result.Succeeded)
+				{
+					
+					//System.Console.WriteLine("Logging in should be successful");
+					//System.Console.WriteLine("Result of PasswordSignInAsync: " + result);
+
+					return RedirectToAction("Index", "Home");
+				}
+
+				if (result.IsLockedOut)
+				{
+					return View("AccountLocked");
+				}
+
+				ModelState.AddModelError("", "Invalid Login Attempt");
+			}
+
+			return View(model);
+		}
+
+		[HttpGet]
+		[AllowAnonymous]
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[AllowAnonymous]
+		public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				var user = await _userManager.FindByEmailAsync(model.Email);
+				if (user != null && await _userManager.IsEmailConfirmedAsync(user))
+				{
+					var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+					var passwordResetLink = Url.Action("ResetPassword", "Accounts", new { email = model.Email, token = token }, Request.Scheme);
+
+					//_logger.Log(LogLevel.Warning, passwordResetLink);
+
+					return View("ForgotPasswordConfirmation");
+				}
+
+				return View("ForgotPasswordConfirmation");
+			}
+
+			return View(model);
+		}
+
 	}
+
 }

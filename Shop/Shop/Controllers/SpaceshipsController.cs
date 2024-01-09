@@ -9,9 +9,12 @@ using Microsoft.EntityFrameworkCore;
 using static System.Net.Mime.MediaTypeNames;
 using Shop.ApplicationServices.Services;
 using Shop.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Shop.Controllers
+
 {
+    [Authorize]   
     public class SpaceshipsController : Controller
     {
 

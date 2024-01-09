@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Shop.Core.Domain;
 using ShopCore.Domain;
@@ -17,5 +18,7 @@ namespace Shop.Data
         public DbSet<RealEstate> RealEstates { get; set; }
         public DbSet<FileToDatabase> FileToDatabases { get; set; }
         public DbSet<Kindergarten> KinderGartens { get; set; }
-    }
+
+		public DbSet<IdentityRole> IdentityRoles { get; set; }
+	}
 }
