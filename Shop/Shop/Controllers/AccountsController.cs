@@ -101,7 +101,7 @@ namespace Shop.Controllers
 
 				if (result.Succeeded)
 				{
-					
+
 					//System.Console.WriteLine("Logging in should be successful");
 					//System.Console.WriteLine("Result of PasswordSignInAsync: " + result);
 
@@ -150,6 +150,14 @@ namespace Shop.Controllers
 			return View(model);
 		}
 
+
+		[HttpPost]
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Home");
+
+		}
 	}
 
 }
