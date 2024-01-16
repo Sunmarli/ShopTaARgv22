@@ -1,6 +1,8 @@
-﻿namespace Shop.Security
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace Shop.Security
 {
-	public class CustomEmailConfirmationTokenProviderOptions: DataProtectionTokenProviderOption
+	public class CustomEmailConfirmationTokenProviderOptions: DataProtectionTokenProviderOptions
 	{
 	}
 }

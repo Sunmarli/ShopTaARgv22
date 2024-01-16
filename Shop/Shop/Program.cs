@@ -4,7 +4,7 @@ using ShopCore.ServiceInterface;
 using Shop.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
 using Shop.Data;
-using TARgv22Shop.Hubs;
+using Shop.Hubs;
 using Microsoft.AspNetCore.Identity;
 using Shop.Core.Domain;
 
@@ -26,6 +26,8 @@ builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
 builder.Services.AddScoped<ICoctailServices, CoctailServices>();
 builder.Services.AddScoped<IAccuWeatherServices, AccuWeatherServices>();
 builder.Services.AddScoped<IEmailServices, EmailServices>();
+
+builder.Services.AddRazorPages();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
@@ -64,6 +66,9 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
+
+app.MapRazorPages();
 
 app.MapControllerRoute(
     name: "default",
